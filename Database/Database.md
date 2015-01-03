@@ -36,4 +36,53 @@
 
 # SQL
 
+## 制約
 
+### 外部キーの設定
+
+#### 列制約の書き方
+```
+CREATE TABLE 社員(社員番号 CHAR(8) PRIMARY KEY,
+                 名前 CHAR(30) NOT NULL,
+                 担当番号 CHAR(5) REFERENCES 担当(担当番号))
+```
+
+#### テーブル制約の書き方
+```
+CREATE TABLE 社員(社員番号 CHAR(5) RPIMARY KEY,
+                 名前 CHAR(30) NOT NULL,
+                 担当番号 CHAR(5),
+                 FOREIGN KEY(担当番号)
+                 REFERENCES 担当(担当番号))
+```
+
+### 削除・更新オプションの指定
+参照先属性を削除もしくは更新した時の動作として以下のオプションがある。
+
+まず削除か更新かは以下の通りに指定する。
+
+- ON DELETE
+- ON UPDATE
+
+次にどのような動作を実施するかは以下の通りに指定する。
+
+- NO ACTION ・・・ 何もしない。参照先は削除・更新出来ない。
+- CASCADE ・・・ 参照先が削除されたら同時に削除する。
+- SET NULL ・・・ 参照先が削除されたらNULLを設定する。
+
+SQLは以下の通りに記述する。
+
+```
+CREATE TABLE 社員(社員番号 CHAR(5) RPIMARY KEY,
+                 名前 CHAR(30) NOT NULL,
+                 担当番号 CHAR(5),
+                 FOREIGN KEY(担当番号)
+                 REFERENCES 担当(担当番号)
+                 ON DELETE SET NULL)
+```
+
+### 表明(ASSERTION)
+
+### 定義域(DOMAIN)
+
+### 制約名の付与(CONSTRAINT)
