@@ -86,3 +86,41 @@ CREATE TABLE 社員(社員番号 CHAR(5) RPIMARY KEY,
 ### 定義域(DOMAIN)
 
 ### 制約名の付与(CONSTRAINT)
+
+-
+
+## アクセス権限
+
+### ロール(ROLE)
+
+#### １．ロールの作成
+
+CREATE ROLE ロール名
+
+```
+CREATE ROLE セキュリティ管理者
+```
+
+#### ２．アクセス権限をロールに付与
+
+GRANT 権限 ON テーブル名（またはビュー名） TO ロール名
+
+```
+GRANT ALL PRIVILEGES ON 社員 TO セキュリティ管理者
+```
+
+#### ３．ロールにロールを付与
+
+GRANT ロール名 TO ロール名
+
+```
+GRANT セキュリティ管理者 TO 社長
+```
+
+#### ４．ユーザにロールを付与
+
+GRANT ロール名 TO ユーザ名
+
+```
+GRANT セキュリティ管理者 TO 田中大輔
+```
